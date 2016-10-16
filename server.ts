@@ -2,7 +2,8 @@
 
 ///<reference path="C:\Development\node\events_cli\libs\require.d.ts" />
 ///<reference path="C:\Development\node\events_cli\libs\event_class.ts" />
-
+var server_port = process.env.YOUR_PORT || process.env.PORT || 80;
+var server_host = process.env.YOUR_HOST || '0.0.0.0';
 
 var http = require('http'); 
 var url = require('url');
@@ -316,5 +317,6 @@ var create = http.createServer(function(req, res){
           res.end("Bad Request");
       }
     
-}).listen(process.env.PORT || 5000);
-console.log("Server Ready");
+}).listen(server_port, server_host, function() {
+    console.log('Listening on port %d', server_port);
+});
