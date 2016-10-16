@@ -2,17 +2,17 @@
 
 ///<reference path="C:\Development\node\events_cli\libs\require.d.ts" />
 ///<reference path="C:\Development\node\events_cli\libs\event_class.ts" />
-require("amd-loader");
+
 var http = require('http'); 
 var url = require('url');
 var querystring = require('querystring');    
-import event_class from './../../libs/event_class'
-import sql_func from './../../libs/sql_func'
-import result_class from './../../libs/result_class';
-import query_builders from './../../libs/query-builders';
-import json_export from './../../libs/export-json';
-import html_export from './../../libs/export-html';
-import xml_export from './../../libs/export-xml';
+import event_class from './libs/event_class'
+import sql_func from './libs/sql_func'
+import result_class from './libs/result_class';
+import query_builders from './libs/query-builders';
+import json_export from './libs/export-json';
+import html_export from './libs/export-html';
+import xml_export from './libs/export-xml';
 class parse_string{
     private pre_string;
     constructor(_string:string){
