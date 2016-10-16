@@ -5,7 +5,6 @@
   "main": "server.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server",
     "build": "tsc -module commonjs -target es6 server"
   },
   "author": "",

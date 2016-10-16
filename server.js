@@ -1,11 +1,11 @@
-"use strict";
 ///<reference path="C:\Development\node\events_cli\libs\require.d.ts" />
 ///<reference path="C:\Development\node\events_cli\libs\event_class.ts" />
-var server_port = process.env.YOUR_PORT || process.env.PORT || 80;
-var server_host = process.env.YOUR_HOST || '0.0.0.0';
+"use strict";
 var http = require('http');
 var url = require('url');
 var process = require('process');
+var server_port = process.env.YOUR_PORT || process.env.PORT || 80;
+var server_host = process.env.YOUR_HOST || '0.0.0.0';
 var querystring = require('querystring');
 const event_class_1 = require('./libs/event_class');
 const sql_func_1 = require('./libs/sql_func');
