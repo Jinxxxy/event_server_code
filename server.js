@@ -1,8 +1,11 @@
+"use strict";
 ///<reference path="C:\Development\node\events_cli\libs\require.d.ts" />
 ///<reference path="C:\Development\node\events_cli\libs\event_class.ts" />
-"use strict";
+var server_port = process.env.YOUR_PORT || process.env.PORT || 80;
+var server_host = process.env.YOUR_HOST || '0.0.0.0';
 var http = require('http');
 var url = require('url');
+var process = require('process');
 var querystring = require('querystring');
 const event_class_1 = require('./libs/event_class');
 const sql_func_1 = require('./libs/sql_func');
@@ -124,7 +127,11 @@ class parse_string {
         return server_export_prom;
     }
 }
-var create = http.createServer(function (req, res) {
+var express = require('express');
+var app = express();
+app.set('port', (process.env.PORT || 5000));
+//For avoidong Heroku $PORT error
+app.get('/', function (req, res) {
     if (req.url.indexOf("***ADD-NEW:://") !== -1) {
         var parsed_string = parse_string.replace_vals(req.url).replace("***ADD-NEW:://", "");
         var obj = JSON.parse(parsed_string);
@@ -303,5 +310,6 @@ var create = http.createServer(function (req, res) {
         res.writeHead(200, { "content-type": "text/plain" });
         res.end("Bad Request");
     }
-}).listen(3000);
-console.log("Server Ready");
+}).listen(server_port, server_host, function () {
+    console.log('Listening on port %d', server_port);
+});

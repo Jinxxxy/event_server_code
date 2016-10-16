@@ -7,6 +7,8 @@ var server_host = process.env.YOUR_HOST || '0.0.0.0';
 
 var http = require('http'); 
 var url = require('url');
+var process= require('process');
+
 var querystring = require('querystring');    
 import event_class from './libs/event_class'
 import sql_func from './libs/sql_func'
