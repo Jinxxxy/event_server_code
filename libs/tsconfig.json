@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "module": "amd",
+        "sourceMap": true
+    }
+    /*"files":[
+        "sql_func.ts",
+        "event_class.ts",
+        "misc_func.ts",
+        "prompt_func.ts"
+    ]*/
+}

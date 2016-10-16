@@ -1,0 +1,22 @@
+{
+  "name": "eventserver",
+  "version": "1.0.0",
+  "description": "server code for events app",
+  "main": "server.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsc -module commonjs -target es6 server"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/filesaver": "0.0.30",
+    "es6-promise": "^3.0.2",
+    "express": "^4.14.0",
+    "mysql": "^2.11.1",
+    "prompt": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/core-js": "^0.9.34"
+  }
+}
