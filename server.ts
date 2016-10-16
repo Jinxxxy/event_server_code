@@ -144,8 +144,13 @@ class parse_string{
     
 }
 
+var express = require('express');
+var app     = express();
 
-var create = http.createServer(function(req, res){ 
+app.set('port', (process.env.PORT || 5000));
+
+//For avoidong Heroku $PORT error
+app.get('/',function(req, res){ 
     if(req.url.indexOf("***ADD-NEW:://") !== -1){
         var parsed_string: string = parse_string.replace_vals(req.url).replace("***ADD-NEW:://","");        
         var obj = JSON.parse(parsed_string);
