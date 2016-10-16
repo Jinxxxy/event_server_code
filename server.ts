@@ -2,6 +2,11 @@
 
 ///<reference path="C:\Development\node\events_cli\libs\require.d.ts" />
 ///<reference path="C:\Development\node\events_cli\libs\event_class.ts" />
+declare var process: {
+   env: {
+       NODE_ENV: string
+   }
+};
 
 var http = require('http'); 
 var url = require('url');
@@ -315,5 +320,5 @@ var create = http.createServer(function(req, res){
           res.end("Bad Request");
       }
     
-}).listen(3000);
+}).listen(process.env.PORT || 5000);
 console.log("Server Ready");
