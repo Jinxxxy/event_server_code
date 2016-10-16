@@ -2,11 +2,7 @@
 
 ///<reference path="C:\Development\node\events_cli\libs\require.d.ts" />
 ///<reference path="C:\Development\node\events_cli\libs\event_class.ts" />
-declare var process: {
-   env: {
-       NODE_ENV: string
-   }
-};
+
 
 var http = require('http'); 
 var url = require('url');
