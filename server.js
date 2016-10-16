@@ -308,7 +308,7 @@ app.get('/', function (req, res) {
     else {
         res.setHeader("Access-Control-Allow-Origin", "*");
         res.writeHead(200, { "content-type": "text/plain" });
-        res.end("Bad Request");
+        res.end("Unable to process request");
     }
 }).listen(server_port, server_host, function () {
     console.log('Listening on port %d', server_port);
