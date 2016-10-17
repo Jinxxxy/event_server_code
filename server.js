@@ -259,7 +259,7 @@ app.get('/', function (req, res) {
     }
     else if (req.url.indexOf("***EDIT-GET::") !== -1) {
         var query_id = parse_string.get_id_from_url(req.url);
-        var get_by_id_prom = parse_string.get_results("SELECT * FROM events_data WHERE idkey = " + query_id + ";");
+        var get_by_id_prom = parse_string.get_results("SELECT * FROM sql8140444.events_data WHERE idkey = " + query_id + ";");
         +get_by_id_prom.then(function (res_cls) {
             if (res_cls.res_array.length === 0) {
                 return ("**//No Results");
