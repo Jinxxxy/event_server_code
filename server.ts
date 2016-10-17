@@ -150,9 +150,10 @@ class parse_string{
 
 var express = require('express');
 var app     = express();
+var cors = require('cors');
 
 app.set('port', (process.env.PORT || 5000));
-
+app.use(cors());
 //For avoidong Heroku $PORT error
 app.get('/',function(req, res){ 
     if(req.url.indexOf("***ADD-NEW:://") !== -1){
