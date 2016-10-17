@@ -219,7 +219,7 @@ app.get('/', function (req, res) {
                 });
                 break;
             case "QUERY=\"SELECTALL\"":
-                var all_prom = parse_string.get_results("SELECT * FROM devbox.events_data");
+                var all_prom = parse_string.get_results("SELECT * FROM events_data");
                 all_prom.then(function (res_obj) {
                     if (res_obj.err_flag === true) {
                         return ("***No results to return***. Something went wrong with your request");
@@ -257,7 +257,7 @@ app.get('/', function (req, res) {
     }
     else if (req.url.indexOf("***EDIT-GET::") !== -1) {
         var query_id = parse_string.get_id_from_url(req.url);
-        var get_by_id_prom = parse_string.get_results("SELECT * FROM devbox.events_data WHERE idkey = " + query_id + ";");
+        var get_by_id_prom = parse_string.get_results("SELECT * FROM events_data WHERE idkey = " + query_id + ";");
         +get_by_id_prom.then(function (res_cls) {
             if (res_cls.res_array.length === 0) {
                 return ("**//No Results");
