@@ -29,7 +29,7 @@ class sql_func {
         var connection = mysql.createConnection({
             host: "sql8.freemysqlhosting.net",
             port: '3306',
-            user: 'sql8140444',
+            user: '',
             password: 'Umr7EDGELK'
         });
         return connection;
@@ -37,7 +37,7 @@ class sql_func {
     static retrieve_by_date(date, cb) {
         var connection = this.create_connection();
         var prom = new Promise(function (resolve, reject) {
-            connection.query("SELECT * FROM sql8140444.events_data WHERE dateandtime = " + date + " ;", function (err, results) {
+            connection.query("SELECT * FROM events_data WHERE dateandtime = " + date + " ;", function (err, results) {
                 console.log("Results: " + Object.keys(results).length + " entries for the specified date");
                 var cls_arr = sql_func.result_to_array(results);
                 resolve(cls_arr);
@@ -69,7 +69,7 @@ class sql_func {
     }
     static retrieve_last(_id, cb) {
         var connection = this.create_connection();
-        connection.query("SELECT * FROM sql8140444.events_data WHERE idkey = '" + _id + "'", { title: 'test' }, function (err, result) {
+        connection.query("SELECT * FROM events_data WHERE idkey = '" + _id + "'", { title: 'test' }, function (err, result) {
             if (err) {
                 connection.end(function (err) { });
                 throw err;
