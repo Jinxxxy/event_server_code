@@ -31,10 +31,10 @@ export default class sql_func{
     }
     public static create_connection(): any{
         var connection = mysql.createConnection({
-            host: "127.0.0.1",
+            host: "http://sql8.freemysqlhosting.net",
             port: '3306',
-            user: 'root',
-            password: 'root'
+            user: 'sql8140444',
+            password: 'Umr7EDGELK'
         });        
         return connection;
     }  
