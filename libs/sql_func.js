@@ -27,10 +27,10 @@ class sql_func {
     }
     static create_connection() {
         var connection = mysql.createConnection({
-            host: "127.0.0.1",
+            host: "sql8.freemysqlhosting.net",
             port: '3306',
-            user: 'root',
-            password: 'root'
+            user: 'sql8140444',
+            password: 'Umr7EDGELK'
         });
         return connection;
     }

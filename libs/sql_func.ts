@@ -31,7 +31,7 @@ export default class sql_func{
     }
     public static create_connection(): any{
         var connection = mysql.createConnection({
-            host: "http://sql8.freemysqlhosting.net",
+            host: "sql8.freemysqlhosting.net",
             port: '3306',
             user: 'sql8140444',
             password: 'Umr7EDGELK'
