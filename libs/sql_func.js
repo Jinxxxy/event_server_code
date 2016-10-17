@@ -29,7 +29,7 @@ class sql_func {
         var connection = mysql.createConnection({
             host: "sql8.freemysqlhosting.net",
             port: '3306',
-            user: '',
+            user: 'sql8140444',
             password: 'Umr7EDGELK'
         });
         return connection;
