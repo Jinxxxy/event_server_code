@@ -135,7 +135,7 @@ app.use(cors());
 //For avoidong Heroku $PORT error
 app.get('/', function (req, res) {
     if (req.url.indexOf("***ADD-NEW:://") !== -1) {
-        var parsed_string = parse_string.replace_vals(req.url).replace("***ADD-NEW:://", "");
+        var parsed_string = parse_string.replace_vals(req.url).replace("?***ADD-NEW:://", "");
         var obj = JSON.parse(parsed_string);
         var ev_cls = parse_string.obj_to_class(obj);
         var prom = sql_func_1.default.insert(query_builders_1.default.insert_query_builder(ev_cls[0]));
