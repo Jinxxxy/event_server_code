@@ -3,6 +3,7 @@ const event_class_1 = require('./event_class');
 const date_functions_1 = require('./date_functions');
 var mysql = require('mysql');
 const result_class_1 = require('./result_class');
+const config_1 = require('./config');
 class sql_func {
     static result_to_array(result_arr, cb) {
         var output_arr = [];
@@ -26,18 +27,13 @@ class sql_func {
         }
     }
     static create_connection() {
-        var connection = mysql.createConnection({
-            host: "sql8.freemysqlhosting.net",
-            port: '3306',
-            user: 'sql8140444',
-            password: 'Umr7EDGELK'
-        });
+        var connection = mysql.createConnection(config_1.default.get_connection_info());
         return connection;
     }
     static retrieve_by_date(date, cb) {
         var connection = this.create_connection();
         var prom = new Promise(function (resolve, reject) {
-            connection.query("SELECT * FROM " + config_item.get_database_table_string() + " WHERE dateandtime = " + date + " ;", function (err, results) {
+            connection.query("SELECT * FROM " + config_1.default.get_database_table_string() + " WHERE dateandtime = " + date + " ;", function (err, results) {
                 console.log("Results: " + Object.keys(results).length + " entries for the specified date");
                 var cls_arr = sql_func.result_to_array(results);
                 resolve(cls_arr);
@@ -69,7 +65,7 @@ class sql_func {
     }
     static retrieve_last(_id, cb) {
         var connection = this.create_connection();
-        connection.query("SELECT * FROM " + config_item.get_database_table_string() + " WHERE idkey = '" + _id + "'", { title: 'test' }, function (err, result) {
+        connection.query("SELECT * FROM " + config_1.default.get_database_table_string() + " WHERE idkey = '" + _id + "'", { title: 'test' }, function (err, result) {
             if (err) {
                 connection.end(function (err) { });
                 throw err;

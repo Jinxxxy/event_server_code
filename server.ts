@@ -234,7 +234,7 @@ app.get('/',function(req, res){
               })
               break;
               case "QUERY=\"SELECTALL\"":
-              var all_prom: Promise<result_class> = parse_string.get_results("SELECT * FROM " + config_item.get_database_table_string() + "");
+              var all_prom: Promise<result_class> = parse_string.get_results("SELECT * FROM " + config_item.get_database_table_string());
               all_prom.then(function(res_obj){                
                  if(res_obj.err_flag === true){
                       return("***No results to return***. Something went wrong with your request");

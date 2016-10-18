@@ -1,6 +1,6 @@
+"use strict";
 ///<reference path="C:\Development\node\events_cli\libs\require.d.ts" />
 ///<reference path="C:\Development\node\events_cli\libs\event_class.ts" />
-"use strict";
 var http = require('http');
 var url = require('url');
 var process = require('process');
@@ -13,6 +13,7 @@ const query_builders_1 = require('./libs/query-builders');
 const export_json_1 = require('./libs/export-json');
 const export_html_1 = require('./libs/export-html');
 const export_xml_1 = require('./libs/export-xml');
+const config_1 = require('./libs/config');
 class parse_string {
     constructor(_string) {
         this.pre_string = _string;
@@ -221,7 +222,7 @@ app.get('/', function (req, res) {
                 });
                 break;
             case "QUERY=\"SELECTALL\"":
-                var all_prom = parse_string.get_results("SELECT * FROM " + config_item.get_database_table_string() + "");
+                var all_prom = parse_string.get_results("SELECT * FROM " + config_1.default.get_database_table_string());
                 all_prom.then(function (res_obj) {
                     if (res_obj.err_flag === true) {
                         return ("***No results to return***. Something went wrong with your request");
@@ -259,7 +260,7 @@ app.get('/', function (req, res) {
     }
     else if (req.url.indexOf("***EDIT-GET::") !== -1) {
         var query_id = parse_string.get_id_from_url(req.url);
-        var get_by_id_prom = parse_string.get_results("SELECT * FROM " + config_item.get_database_table_string() + " WHERE idkey = " + query_id + ";");
+        var get_by_id_prom = parse_string.get_results("SELECT * FROM " + config_1.default.get_database_table_string() + " WHERE idkey = " + query_id + ";");
         +get_by_id_prom.then(function (res_cls) {
             if (res_cls.res_array.length === 0) {
                 return ("**//No Results");
