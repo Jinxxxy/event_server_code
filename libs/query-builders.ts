@@ -1,15 +1,16 @@
 declare var require: any;
 import event_class from './event_class'
 import date_functions from './date_functions'
+import config_item from './config';
 var mysql = require('mysql');
 
 class query_builders{
     public static insert_query_builder(ins_eve: event_class): string{
-        return "insert into sql8140444.events_data(dateandtime, type, notes, recurring) values(" + mysql.escape(ins_eve.date) + "," + mysql.escape(ins_eve.type) + "," + mysql.escape(ins_eve.notes) + "," + mysql.escape(ins_eve.recurring) + ")";
+        return "insert into " + config_item.get_database_table_string() + "(dateandtime, type, notes, recurring) values(" + mysql.escape(ins_eve.date) + "," + mysql.escape(ins_eve.type) + "," + mysql.escape(ins_eve.notes) + "," + mysql.escape(ins_eve.recurring) + ")";
     }
     public static update_query_builder(upd_eve: event_class): string{
         console.log(upd_eve);
-        var pre_string: string = "UPDATE sql8140444.events_data SET ";
+        var pre_string: string = "UPDATE " + config_item.get_database_table_string() + " SET ";
         var add_date: string = "dateandtime = " + upd_eve.date + ", ";
         var add_type: string = "type = " + mysql.escape(upd_eve.type) + ", ";
         var add_notes: string = "notes = " + mysql.escape(upd_eve.notes) + ", ";
@@ -20,7 +21,7 @@ class query_builders{
         return output_string;
     }
     public static delete_query_builder(id: string){
-        return 'DELETE from sql8140444.events_data where idkey = ' + id;
+        return 'DELETE from " + config_item.get_database_table_string() + " where idkey = ' + id;
     }
     public static week_query_builder(): string{
         var orig_date: Date = new Date();
@@ -36,12 +37,13 @@ class query_builders{
         
         var pre_string: string = `
         SELECT *
-        FROM sql8140444.events_data
+        FROM ` + config_item.get_database_table_string() + `
         WHERE
         ((dateandtime > ` + full_pre_string + ` AND dateandtime < ` + full_post_string + `) AND recurring = 0) OR
         (((MONTH(dateandtime) = ` + post_month + ` AND DAY(dateandtime) < ` + post_date + ` AND (MONTH(dateandtime) = ` + pre_month + ` AND DAY(dateandtime) > ` + pre_date + `))) AND recurring = 1)
 
         `;
+        console.log(pre_string);
         return pre_string;
     }
     public static day_query_builder(): string{
@@ -54,10 +56,11 @@ class query_builders{
         query_string = yyyy + mm + dd;
         var output_string = `
         SELECT *
-        FROM sql8140444.events_data
+        FROM ` + config_item.get_database_table_string() + `
         WHERE
         (dateandtime = ` + query_string + ` AND recurring = 0) OR ((MONTH(dateandtime) = ` + mm + ` AND DAY(dateandtime) = ` + dd + `) AND recurring = 1);
         `
+        console.log(output_string);
         return output_string;
         
     }
@@ -71,7 +74,7 @@ class query_builders{
         var out_string = orig_date.getFullYear().toString() + date_functions.single_date_to_double_date(orig_date.getMonth()) + orig_date.getDate().toString();        
                 
         var pre_string: string = `
-        SELECT * FROM sql8140444.events_data WHERE         
+        SELECT * FROM ` + config_item.get_database_table_string() + ` WHERE         
         (((dateandtime >= `+ orig_string + `) AND (dateandtime < ` + out_string + `)) AND recurring = 0) 
         OR	
         ((MONTH(dateandtime) = ` + end_month +  ` AND DAY(dateandtime) <= ` + day_val + `)
@@ -80,7 +83,7 @@ class query_builders{
         return pre_string;        
     }
     public static all_query_builder(){
-        return "SELECT * FROM sql8140444.events_data";
+        return "SELECT * FROM " + config_item.get_database_table_string() + "";
     }
 }
 
