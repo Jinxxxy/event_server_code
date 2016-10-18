@@ -2,15 +2,11 @@
 
 ///<reference path="C:\Development\node\events_cli\libs\require.d.ts" />
 ///<reference path="C:\Development\node\events_cli\libs\event_class.ts" />
-
-
 var http = require('http'); 
 var url = require('url');
 var process = require('process');
-
 var server_port = process.env.YOUR_PORT || process.env.PORT || 80;
 var server_host = process.env.YOUR_HOST || '0.0.0.0';
-
 var querystring = require('querystring');    
 import event_class from './libs/event_class'
 import sql_func from './libs/sql_func'
@@ -148,11 +144,9 @@ class parse_string{
     }
     
 }
-
 var express = require('express');
 var app     = express();
 var cors = require('cors');
-
 app.set('port', (process.env.PORT || 5000));
 app.use(cors());
 //For avoidong Heroku $PORT error

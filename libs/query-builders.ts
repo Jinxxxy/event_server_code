@@ -3,7 +3,6 @@ import event_class from './event_class'
 import date_functions from './date_functions'
 import config_item from './config';
 var mysql = require('mysql');
-
 class query_builders{
     public static insert_query_builder(ins_eve: event_class): string{
         return "insert into " + config_item.get_database_table_string() + "(dateandtime, type, notes, recurring) values(" + mysql.escape(ins_eve.date) + "," + mysql.escape(ins_eve.type) + "," + mysql.escape(ins_eve.notes) + "," + mysql.escape(ins_eve.recurring) + ")";
