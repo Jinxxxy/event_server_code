@@ -3,8 +3,11 @@ import event_class from './event_class'
 import date_functions from './date_functions'
 var mysql = require('mysql');
 import result_class from './result_class';
-import config_items from './config'
-export default class sql_func{       
+import config_items from './../../config'
+
+export default class sql_func{     
+    public static table_name: string = config_items.get_database_table_string();
+    public static config_object: Object = config_items.get_connection_info();  
     public static result_to_array(result_arr: any, cb?: Function): Array<event_class>{        
         var output_arr: Array<Object> = [];
         var class_arr: Array<event_class> = [];
@@ -31,13 +34,13 @@ export default class sql_func{
         }
     }
     public static create_connection(): any{
-        var connection = mysql.createConnection(config_items.get_connection_info());        
+        var connection = mysql.createConnection(sql_func.config_object);        
         return connection;
     }  
     public static retrieve_by_date(date: string, cb?: Function): Promise<Array<event_class>>{
         var connection = this.create_connection();
         var prom = new Promise(function(resolve, reject){
-            connection.query("SELECT * FROM " + config_items.get_database_table_string() + " WHERE dateandtime = " + date + " ;", function(err, results){                
+            connection.query("SELECT * FROM " + sql_func.table_name + " WHERE dateandtime = " + date + " ;", function(err, results){                
                 console.log("Results: " + Object.keys(results).length + " entries for the specified date");
                 var cls_arr: Array<event_class> = sql_func.result_to_array(results);
                 resolve(cls_arr)                
@@ -68,7 +71,7 @@ export default class sql_func{
     }    
     public static retrieve_last(_id: number, cb?: Function){
         var connection = this.create_connection();
-        connection.query("SELECT * FROM " + config_items.get_database_table_string() + " WHERE idkey = '" + _id + "'", {title: 'test'}, function(err, result){
+        connection.query("SELECT * FROM " + sql_func.table_name + " WHERE idkey = '" + _id + "'", {title: 'test'}, function(err, result){
             if(err){                                 
                 connection.end(function(err){});
                 throw err;

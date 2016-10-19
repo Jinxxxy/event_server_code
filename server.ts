@@ -15,7 +15,7 @@ import query_builders from './libs/query-builders';
 import json_export from './libs/export-json';
 import html_export from './libs/export-html';
 import xml_export from './libs/export-xml';
-import config_item from './libs/config';
+import config_item from './../config';
 class parse_string{
     private pre_string;
     constructor(_string:string){
@@ -73,24 +73,25 @@ class parse_string{
         return export_comparison_val;        
     }    
     public static get_time_from_url(url_sting: string): string{
+        console.log(url_sting)
         var working_string: string = "";
-        working_string = url_sting.slice(4, url_sting.indexOf("::"));      
+        working_string = url_sting.slice(5, url_sting.indexOf("::"));      
         return working_string;
     }
     public static get_id_from_url(url_string: string){
         return url_string.split("EDIT-GET::")[1].replace("***","");
     }
-    public static get_time_function(time: string): Function{
+    public static get_time_function(time: string): string{
         var target:string = time;
         switch (target) {
         case "DAY":
-        return query_builders.day_query_builder;
+        return query_builders.day_query_builder();
         case "WEEK":
-        return query_builders.week_query_builder;
+        return query_builders.week_query_builder();
         case "MONTH":
-        return query_builders.month_query_builder;
+        return query_builders.month_query_builder();
         case "ALL":
-        return query_builders.all_query_builder;
+        return query_builders.all_query_builder();
         }
         
     }
@@ -101,11 +102,12 @@ class parse_string{
         return update_prom;
     }
     public static server_export_function(export_type: string, export_time:string): Promise<string>{
-        var query_function: Function = parse_string.get_time_function(export_time);
+        var query_function: string = parse_string.get_time_function(export_time);
+        console.log(query_function);
         var server_export_prom: Promise<string> = new Promise(function(resolve, reject){
             switch(export_type){
               case "JSON":
-              var export_json_prom: Promise<result_class> = sql_func.general_query(query_function())
+              var export_json_prom: Promise<result_class> = sql_func.general_query(query_function);
               export_json_prom.then(function(res_cls){
               var export_json_output_string: string = json_export.file_content_builder(res_cls.res_array)
               if(res_cls.res_array.length >= 1){
@@ -117,7 +119,7 @@ class parse_string{
               })
               break;
               case "HTML":
-              var export_html_prom: Promise<result_class> = sql_func.general_query(query_function())
+              var export_html_prom: Promise<result_class> = sql_func.general_query(query_function)
               export_html_prom.then(function(res_cls){
               var export_html_output_string: string = html_export.file_content_builder(res_cls.res_array)
               if(res_cls.res_array.length >= 1){
@@ -128,7 +130,7 @@ class parse_string{
               })
               break;
               case "XML":
-              var export_xml_prom: Promise<result_class> = sql_func.general_query(query_function())
+              var export_xml_prom: Promise<result_class> = sql_func.general_query(query_function)
               export_xml_prom.then(function(res_cls){
               var export_xml_output_string: string = xml_export.file_content_builder(res_cls.res_array)
               if(res_cls.res_array.length >= 1){
@@ -284,7 +286,7 @@ app.get('/',function(req, res){
               res.end(JSON.stringify(response_data));
           })
       } else if(req.url.indexOf("***UPDATE:://") !== -1){
-          var data_to_send: string = parse_string.replace_vals(req.url.replace("***UPDATE:://",""));
+          var data_to_send: string = parse_string.replace_vals(req.url.replace("?***UPDATE:://",""));
           var update_prom: Promise<string> = parse_string.update_function(data_to_send);
           update_prom.then(function(message_string){
               res.setHeader("Access-Control-Allow-Origin", "*");

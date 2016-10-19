@@ -1,7 +1,7 @@
 declare var require: any;
 import event_class from './event_class'
 import date_functions from './date_functions'
-import config_item from './config';
+import config_item from './../../config';
 var mysql = require('mysql');
 class query_builders{
     public static insert_query_builder(ins_eve: event_class): string{
@@ -38,7 +38,7 @@ class query_builders{
         SELECT *
         FROM ` + config_item.get_database_table_string() + `
         WHERE
-        ((dateandtime > ` + full_pre_string + ` AND dateandtime < ` + full_post_string + `) AND recurring = 0) OR
+        ((dateandtime >= ` + full_pre_string + ` AND dateandtime < ` + full_post_string + `) AND recurring = 0) OR
         (((MONTH(dateandtime) = ` + post_month + ` AND DAY(dateandtime) < ` + post_date + ` AND (MONTH(dateandtime) = ` + pre_month + ` AND DAY(dateandtime) > ` + pre_date + `))) AND recurring = 1)
 
         `;
@@ -63,7 +63,7 @@ class query_builders{
         return output_string;
         
     }
-    public static month_query_builder(){
+    public static month_query_builder(): string{
         var orig_date = new Date();
         var orig_string = orig_date.getFullYear().toString() + date_functions.single_date_to_double_date(((orig_date.getMonth() + 1))) + orig_date.getDate().toString();
         var start_month: string = date_functions.single_date_to_double_date(orig_date.getMonth() + 1);
@@ -81,8 +81,10 @@ class query_builders{
         (MONTH(dateandtime) = ` + start_month + ` AND DAY(dateandtime) >= ` + day_val + `)) AND recurring = 1;`        
         return pre_string;        
     }
-    public static all_query_builder(){
-        return "SELECT * FROM " + config_item.get_database_table_string() + "";
+    public static all_query_builder(): string{
+        var return_string: string = "SELECT * FROM " + config_item.get_database_table_string(); 
+        console.log(return_string)
+        return return_string;
     }
 }
 

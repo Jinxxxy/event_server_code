@@ -13,7 +13,7 @@ const query_builders_1 = require('./libs/query-builders');
 const export_json_1 = require('./libs/export-json');
 const export_html_1 = require('./libs/export-html');
 const export_xml_1 = require('./libs/export-xml');
-const config_1 = require('./libs/config');
+const config_1 = require('./../config');
 class parse_string {
     constructor(_string) {
         this.pre_string = _string;
@@ -58,8 +58,9 @@ class parse_string {
         return export_comparison_val;
     }
     static get_time_from_url(url_sting) {
+        console.log(url_sting);
         var working_string = "";
-        working_string = url_sting.slice(4, url_sting.indexOf("::"));
+        working_string = url_sting.slice(5, url_sting.indexOf("::"));
         return working_string;
     }
     static get_id_from_url(url_string) {
@@ -69,13 +70,13 @@ class parse_string {
         var target = time;
         switch (target) {
             case "DAY":
-                return query_builders_1.default.day_query_builder;
+                return query_builders_1.default.day_query_builder();
             case "WEEK":
-                return query_builders_1.default.week_query_builder;
+                return query_builders_1.default.week_query_builder();
             case "MONTH":
-                return query_builders_1.default.month_query_builder;
+                return query_builders_1.default.month_query_builder();
             case "ALL":
-                return query_builders_1.default.all_query_builder;
+                return query_builders_1.default.all_query_builder();
         }
     }
     static update_function(update_data) {
@@ -86,10 +87,11 @@ class parse_string {
     }
     static server_export_function(export_type, export_time) {
         var query_function = parse_string.get_time_function(export_time);
+        console.log(query_function);
         var server_export_prom = new Promise(function (resolve, reject) {
             switch (export_type) {
                 case "JSON":
-                    var export_json_prom = sql_func_1.default.general_query(query_function());
+                    var export_json_prom = sql_func_1.default.general_query(query_function);
                     export_json_prom.then(function (res_cls) {
                         var export_json_output_string = export_json_1.default.file_content_builder(res_cls.res_array);
                         if (res_cls.res_array.length >= 1) {
@@ -101,7 +103,7 @@ class parse_string {
                     });
                     break;
                 case "HTML":
-                    var export_html_prom = sql_func_1.default.general_query(query_function());
+                    var export_html_prom = sql_func_1.default.general_query(query_function);
                     export_html_prom.then(function (res_cls) {
                         var export_html_output_string = export_html_1.default.file_content_builder(res_cls.res_array);
                         if (res_cls.res_array.length >= 1) {
@@ -113,7 +115,7 @@ class parse_string {
                     });
                     break;
                 case "XML":
-                    var export_xml_prom = sql_func_1.default.general_query(query_function());
+                    var export_xml_prom = sql_func_1.default.general_query(query_function);
                     export_xml_prom.then(function (res_cls) {
                         var export_xml_output_string = export_xml_1.default.file_content_builder(res_cls.res_array);
                         if (res_cls.res_array.length >= 1) {
@@ -276,7 +278,7 @@ app.get('/', function (req, res) {
         });
     }
     else if (req.url.indexOf("***UPDATE:://") !== -1) {
-        var data_to_send = parse_string.replace_vals(req.url.replace("***UPDATE:://", ""));
+        var data_to_send = parse_string.replace_vals(req.url.replace("?***UPDATE:://", ""));
         var update_prom = parse_string.update_function(data_to_send);
         update_prom.then(function (message_string) {
             res.setHeader("Access-Control-Allow-Origin", "*");

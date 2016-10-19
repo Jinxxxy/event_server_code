@@ -1,6 +1,6 @@
 "use strict";
 const date_functions_1 = require('./date_functions');
-const config_1 = require('./config');
+const config_1 = require('./../../config');
 var mysql = require('mysql');
 class query_builders {
     static insert_query_builder(ins_eve) {
@@ -34,7 +34,7 @@ class query_builders {
         SELECT *
         FROM ` + config_1.default.get_database_table_string() + `
         WHERE
-        ((dateandtime > ` + full_pre_string + ` AND dateandtime < ` + full_post_string + `) AND recurring = 0) OR
+        ((dateandtime >= ` + full_pre_string + ` AND dateandtime < ` + full_post_string + `) AND recurring = 0) OR
         (((MONTH(dateandtime) = ` + post_month + ` AND DAY(dateandtime) < ` + post_date + ` AND (MONTH(dateandtime) = ` + pre_month + ` AND DAY(dateandtime) > ` + pre_date + `))) AND recurring = 1)
 
         `;
@@ -75,7 +75,9 @@ class query_builders {
         return pre_string;
     }
     static all_query_builder() {
-        return "SELECT * FROM " + config_1.default.get_database_table_string() + "";
+        var return_string = "SELECT * FROM " + config_1.default.get_database_table_string();
+        console.log(return_string);
+        return return_string;
     }
 }
 Object.defineProperty(exports, "__esModule", { value: true });
