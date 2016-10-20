@@ -21,11 +21,23 @@ class parse_string{
     constructor(_string:string){
         this.pre_string = _string;
     }
+    public static replace_invalid_whitespace(output: string, start_point?: number){
+        var start_string: string = output;        
+        var notes_start:number = output.indexOf("%22notes%22:%22");
+        var notes_end: number = output.indexOf("%20}", notes_start);
+        var pre_notes_string: string = output.slice(0, notes_start);
+        var notes_section: string = output.slice(notes_start, notes_end);
+        var post_ntoes_string: string = output.slice(notes_end, output.length);
+        var current_index: number = output.indexOf("%20");
+        
+    }
+
     public static replace_vals(x: string):string{
+        console.log(x);
         var output: string = x;
         while(output.indexOf("%20") >= 0){
-            output = output.replace("%20", "");
-        } 
+            output = output.replace("%20", " ");
+        }        
         while(output.indexOf("%22") >= 0){
             output = output.replace("%22","\"");    
         }
@@ -36,6 +48,7 @@ class parse_string{
             output = output.replace("%7D", "\}")
         }
         output = output = output.replace("/", "");
+        console.log(output);
         return output;
     }
     public static obj_to_class(obj:any): event_class[]{
@@ -294,7 +307,7 @@ app.get('/',function(req, res){
               res.end("Record created. \nID: " + message_string); 
           })
       } else if(req.url.indexOf("***DELETE:://") !== -1){
-        var parsed_string: string = parse_string.replace_vals(req.url).replace("***DELETE:://","");
+        var parsed_string: string = parse_string.replace_vals(req.url).replace("?***DELETE:://","");
         var delete_prom: Promise<result_class> = sql_func.delete_query(query_builders.delete_query_builder(parsed_string));
         
         delete_prom.then(function(res_cls){

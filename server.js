@@ -18,10 +18,20 @@ class parse_string {
     constructor(_string) {
         this.pre_string = _string;
     }
+    static replace_invalid_whitespace(output, start_point) {
+        var start_string = output;
+        var notes_start = output.indexOf("%22notes%22:%22");
+        var notes_end = output.indexOf("%20}", notes_start);
+        var pre_notes_string = output.slice(0, notes_start);
+        var notes_section = output.slice(notes_start, notes_end);
+        var post_ntoes_string = output.slice(notes_end, output.length);
+        var current_index = output.indexOf("%20");
+    }
     static replace_vals(x) {
+        console.log(x);
         var output = x;
         while (output.indexOf("%20") >= 0) {
-            output = output.replace("%20", "");
+            output = output.replace("%20", " ");
         }
         while (output.indexOf("%22") >= 0) {
             output = output.replace("%22", "\"");
@@ -33,6 +43,7 @@ class parse_string {
             output = output.replace("%7D", "\}");
         }
         output = output = output.replace("/", "");
+        console.log(output);
         return output;
     }
     static obj_to_class(obj) {
@@ -287,7 +298,7 @@ app.get('/', function (req, res) {
         });
     }
     else if (req.url.indexOf("***DELETE:://") !== -1) {
-        var parsed_string = parse_string.replace_vals(req.url).replace("***DELETE:://", "");
+        var parsed_string = parse_string.replace_vals(req.url).replace("?***DELETE:://", "");
         var delete_prom = sql_func_1.default.delete_query(query_builders_1.default.delete_query_builder(parsed_string));
         delete_prom.then(function (res_cls) {
             res.setHeader("Access-Control-Allow-Origin", "*");

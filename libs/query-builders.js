@@ -19,7 +19,8 @@ class query_builders {
         return output_string;
     }
     static delete_query_builder(id) {
-        return 'DELETE from " + config_item.get_database_table_string() + " where idkey = ' + id;
+        var return_string = "DELETE from " + config_1.default.get_database_table_string() + " where idkey = " + id;
+        return return_string;
     }
     static week_query_builder() {
         var orig_date = new Date();
@@ -35,7 +36,7 @@ class query_builders {
         FROM ` + config_1.default.get_database_table_string() + `
         WHERE
         ((dateandtime >= ` + full_pre_string + ` AND dateandtime < ` + full_post_string + `) AND recurring = 0) OR
-        (((MONTH(dateandtime) = ` + post_month + ` AND DAY(dateandtime) < ` + post_date + ` AND (MONTH(dateandtime) = ` + pre_month + ` AND DAY(dateandtime) > ` + pre_date + `))) AND recurring = 1)
+        (((MONTH(dateandtime) = ` + post_month + ` AND DAY(dateandtime) < ` + post_date + ` AND (MONTH(dateandtime) = ` + pre_month + ` AND DAY(dateandtime) >= ` + pre_date + `))) AND recurring = 1) ORDER BY dateandtime ASC
 
         `;
         console.log(pre_string);
@@ -52,7 +53,7 @@ class query_builders {
         SELECT *
         FROM ` + config_1.default.get_database_table_string() + `
         WHERE
-        (dateandtime = ` + query_string + ` AND recurring = 0) OR ((MONTH(dateandtime) = ` + mm + ` AND DAY(dateandtime) = ` + dd + `) AND recurring = 1);
+        (dateandtime = ` + query_string + ` AND recurring = 0) OR ((MONTH(dateandtime) = ` + mm + ` AND DAY(dateandtime) = ` + dd + `) AND recurring = 1) ORDER BY dateandtime ASC;
         `;
         console.log(output_string);
         return output_string;
@@ -71,7 +72,7 @@ class query_builders {
         OR	
         ((MONTH(dateandtime) = ` + end_month + ` AND DAY(dateandtime) <= ` + day_val + `)
         OR
-        (MONTH(dateandtime) = ` + start_month + ` AND DAY(dateandtime) >= ` + day_val + `)) AND recurring = 1;`;
+        (MONTH(dateandtime) = ` + start_month + ` AND DAY(dateandtime) >= ` + day_val + `)) AND recurring = 1 ORDER BY dateandtime ASC;`;
         return pre_string;
     }
     static all_query_builder() {

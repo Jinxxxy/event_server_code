@@ -136,7 +136,7 @@ export default class sql_func{
     public static delete_query(query: string): Promise<result_class>{
          var connection = this.create_connection();
         var prom = new Promise(function(res, rej){            
-            connection.query(query, {title: 'test'}, function(err, result) {
+            connection.query(query/*, {title: 'test'}*/, function(err, result) {
                 if (err){
                     var res_obj: result_class = new result_class([], err.message, true);
                     res(res_obj);    
