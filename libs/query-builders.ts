@@ -1,7 +1,7 @@
 declare var require: any;
 import event_class from './event_class'
 import date_functions from './date_functions'
-import config_item from './../../config';
+import config_item from './cfg/config';
 var mysql = require('mysql');
 class query_builders{
     public static insert_query_builder(ins_eve: event_class): string{

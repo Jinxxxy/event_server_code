@@ -3,7 +3,7 @@ const event_class_1 = require('./event_class');
 const date_functions_1 = require('./date_functions');
 var mysql = require('mysql');
 const result_class_1 = require('./result_class');
-const config_1 = require('./../../config');
+const config_1 = require('./cfg/config');
 class sql_func {
     static result_to_array(result_arr, cb) {
         var output_arr = [];

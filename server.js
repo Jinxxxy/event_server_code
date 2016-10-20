@@ -13,7 +13,7 @@ const query_builders_1 = require('./libs/query-builders');
 const export_json_1 = require('./libs/export-json');
 const export_html_1 = require('./libs/export-html');
 const export_xml_1 = require('./libs/export-xml');
-const config_1 = require('./../config');
+const config_1 = require('./libs/cfg/config');
 class parse_string {
     constructor(_string) {
         this.pre_string = _string;

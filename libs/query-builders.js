@@ -1,6 +1,6 @@
 "use strict";
 const date_functions_1 = require('./date_functions');
-const config_1 = require('./../../config');
+const config_1 = require('./cfg/config');
 var mysql = require('mysql');
 class query_builders {
     static insert_query_builder(ins_eve) {
