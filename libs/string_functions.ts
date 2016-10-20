@@ -1,3 +1,4 @@
+
 import event_class from "./event_class";
 class str_fnc{
     public static string_to_number_bool(str: string): number{

@@ -1,5 +1,5 @@
 export class config_items{
-    public static prod_or_dev = "dev";
+    public static prod_or_dev = "prod";
     public static get_database_table_string(): string{
         //add in call to database to retrieve db table name
         switch(config_items.prod_or_dev){

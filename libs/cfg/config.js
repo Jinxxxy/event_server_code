@@ -39,7 +39,7 @@ class config_items {
         }
     }
 }
-config_items.prod_or_dev = "dev";
+config_items.prod_or_dev = "prod";
 exports.config_items = config_items;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = config_items;
