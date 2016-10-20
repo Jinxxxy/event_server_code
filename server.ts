@@ -15,7 +15,7 @@ import query_builders from './libs/query-builders';
 import json_export from './libs/export-json';
 import html_export from './libs/export-html';
 import xml_export from './libs/export-xml';
-import config_item from './../config';
+import config_item from './libs/cfg/config';
 class parse_string{
     private pre_string;
     constructor(_string:string){

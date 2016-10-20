@@ -3,7 +3,7 @@ import event_class from './event_class'
 import date_functions from './date_functions'
 var mysql = require('mysql');
 import result_class from './result_class';
-import config_items from './../../config'
+import config_items from './cfg/config'
 
 export default class sql_func{     
     public static table_name: string = config_items.get_database_table_string();
