@@ -34,6 +34,7 @@ class date_fnc {
         return output_arr;
     }
     static date_to_date_string(retrieve_val) {
+        console.log(retrieve_val);
         var return_string = this.single_date_to_double_date(retrieve_val.getDate()) + "/" + this.single_date_to_double_date(retrieve_val.getMonth() + 1) + "/" + retrieve_val.getFullYear().toString();
         return return_string;
     }
