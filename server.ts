@@ -338,5 +338,5 @@ app.get('/',function(req, res){
       }
     
 }).listen(server_port, server_host, function() {
-    console.log('Listening on port %d', server_port);
+    console.log('Listening on port %d. Connected to: ' + config_item.get_database_table_string(), server_port);
 });
