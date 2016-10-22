@@ -61,7 +61,7 @@ class export_to_html{
             <br>            
             `
         }       
-        return building;
+        return this.pre_html + building + this.post_html;
     }
     public static export_main(cls_arr: Array<event_class>){
         var prom = new Promise(function(resolve, reject){

@@ -16,7 +16,7 @@ class export_to_html {
             <br>            
             `;
         }
-        return building;
+        return this.pre_html + building + this.post_html;
     }
     static export_main(cls_arr) {
         var prom = new Promise(function (resolve, reject) {
