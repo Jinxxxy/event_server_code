@@ -50,6 +50,7 @@ export_to_html.pre_html = `
             font-style: normal;
             }
             body{
+                font-family: 'myFirstFont';
                 background-color: black;
             }
             .event{
