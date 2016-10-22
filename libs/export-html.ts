@@ -18,6 +18,7 @@ class export_to_html{
             font-style: normal;
             }
             body{
+                font-family: 'myFirstFont';
                 background-color: black;
             }
             .event{
