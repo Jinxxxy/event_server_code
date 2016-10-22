@@ -43,15 +43,16 @@ export_to_html.pre_html = `
         <head>  
         <style>
             @font-face {
-            font-family: 'myFirstFont';
-            src: url('http://johnnycampbell.x10host.com/eventsapp/fonts/typewrite-webfont.woff2') format('woff2'),
-                url('http://johnnycampbell.x10host.com/eventsapp/fonts/typewrite-webfont.woff') format('woff');
-            font-weight: normal;
-            font-style: normal;
+                font-family: 'myFirstFont';
+                src: url('../fonts/typewrite-webfont.woff2') format('woff2'),
+                    url('../fonts/typewrite-webfont.woff') format('woff');
+                font-weight: normal;
+                font-style: normal;
             }
             body{
                 font-family: 'myFirstFont';
                 background-color: black;
+                color: white;
             }
             .event{
                 background-color: grey;
