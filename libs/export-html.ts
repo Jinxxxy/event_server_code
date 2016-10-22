@@ -12,8 +12,8 @@ class export_to_html{
         <style>
             @font-face {
             font-family: 'myFirstFont';
-            src: url('typewrite-webfont.woff2') format('woff2'),
-                url('typewrite-webfont.woff') format('woff');
+            src: url('http://johnnycampbell.x10host.com/eventsapp/fonts/typewrite-webfont.woff2') format('woff2'),
+                url('http://johnnycampbell.x10host.com/eventsapp/fonts/typewrite-webfont.woff') format('woff');
             font-weight: normal;
             font-style: normal;
             }
